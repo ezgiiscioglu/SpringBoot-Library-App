@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Home</title>
+</head>
+<body>
+<div th:insert="layout/header :: header"></div>
+<nav th:fragment= "header" class="navbar navbar-expand-lg navbar-dark" style="background-color: #343A40; color: white;">
+    <a class="navbar-brand">Library Application</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent" >
+
+        <ul class="navbar-nav mr-auto" >
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/api/book/list">Books </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/api/author/list">Authors </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/api/publisher/list">Publishers </a>
+            </li>
+        </ul>
+    </div>
+    </div>
+</nav>
+</body>
+</html>

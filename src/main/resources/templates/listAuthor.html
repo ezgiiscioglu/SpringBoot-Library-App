@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Author List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:insert="layout/header::header"></div>
+<div class="container">
+    <h1>Authors</h1>
+    <div class="col-md-4">
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Author Id</th>
+            <th>Author Name</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each = "author : ${authors}">
+            <td th:text="${author.author_id}"></td>
+            <td th:text="${author.author_name}"> </td>
+            <td th:text="${author.description}"> </td>
+            <td><a th:href="@{/api/author/updateAuthor/{id}(id=${author.author_id})}" class="btn btn-primary"></a></td>
+            <td><a th:href="@{/api/author/delete/{id}(id=${author.author_id})}" class="btn btn-primary"></a></td>
+        </tr>
+    </table>
+    <div></h3> <a href="/api/author/addAuthorForm">
+        <button type="button" class="btn btn-outline-secondary">Add Author</button></a></div>
+</div>
+</body>
+</html>

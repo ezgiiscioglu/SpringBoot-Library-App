@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book List</title>
+    <meta charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:insert="layout/header::header"></div>
+<div class="container">
+    <h1>Books</h1>
+    <div class="col-md-4">
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Book Id</th>
+            <th>Book Name</th>
+            <th>Book Sub Name</th>
+            <th>Book Serial Name</th>
+            <th>ISBN</th>
+            <th>Description</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each = "book : ${books}">
+            <td th:text="${book.book_id}"></td>
+            <td th:text="${book.book_sub_name}"> </td>
+            <td th:text="${book.book_serial_name}"> </td>
+            <td th:text="${book.isbn}"> </td>
+            <td th:text="${book.description}"> </td>
+            <td th:text="${book.authors[0].author_name}"> </td>
+            <td th:text="${book.publishers[0].publisher_name}"></td>
+            <td><a th:href="@{/api/book/{id}(id=${book.book_id})}" class="btn btn-primary"></a></td>
+            <td><a th:href="@{/api/book/updateBook/{id}(id=${book.book_id})}" class="btn btn-primary"></a></td>
+            <td><a th:href="@{/api/book/delete/{id}(id=${book.book_id})}" class="btn btn-primary"></a></td>
+        </tr>
+    </table>
+    <div></h3> <a href="/api/book/addBookForm">
+        <button type="button" class="btn btn-outline-secondary">Add Book</button></a></div>
+</div>
+</body>
+</html>

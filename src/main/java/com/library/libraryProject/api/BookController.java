@@ -2,12 +2,10 @@ package com.library.libraryProject.api;
 
 import com.library.libraryProject.model.Book;
 import com.library.libraryProject.service.BookService;
-import com.library.libraryProject.service.imp.AuthorServiceImp;
-import com.library.libraryProject.service.imp.BookServiceImp;
-import com.library.libraryProject.service.imp.PublisherServiceImp;
+import com.library.libraryProject.service.impl.AuthorServiceImpl;
+import com.library.libraryProject.service.impl.BookServiceImpl;
+import com.library.libraryProject.service.impl.PublisherServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/book")
 public class BookController {
-    private final BookServiceImp bookServiceImp;
-    private final AuthorServiceImp authorServiceImp;
-    private final PublisherServiceImp publisherServiceImp;
+    private final BookServiceImpl bookServiceImpl;
+    private final AuthorServiceImpl authorServiceImpl;
+    private final PublisherServiceImpl publisherServiceImpl;
     private final BookService bookService;
 
     @GetMapping("/list")
@@ -31,15 +29,15 @@ public class BookController {
     }
     @GetMapping("/{id}")
     public String getById(@PathVariable(value = "id", required = true) Long id, Model model) {
-        Book book = bookServiceImp.getById(id);
+        Book book = bookServiceImpl.getById(id);
         model.addAttribute("book", book);
         return "/api/book/listBook";
     }
 
     @GetMapping("/addBookForm")
     public String newCreateForm(Book book, Model model) {
-        model.addAttribute("authors", authorServiceImp.getAll());
-        model.addAttribute("publishers", publisherServiceImp.getAll());
+        model.addAttribute("authors", authorServiceImpl.getAll());
+        model.addAttribute("publishers", publisherServiceImpl.getAll());
         return "addBook";
     }
 
@@ -48,8 +46,8 @@ public class BookController {
         if (bindingResult.hasErrors()) {
             return bindingResult.toString();
         }
-        bookServiceImp.save(book);
-        model.addAttribute("book", bookServiceImp.save(book));
+        bookServiceImpl.save(book);
+        model.addAttribute("book", bookServiceImpl.save(book));
         return "redirect:/api/book/list";
     }
     @PostMapping("/updateBook/{id}")
@@ -58,22 +56,22 @@ public class BookController {
             book.setBook_id(id);
             return "updateBook";
         }
-        bookServiceImp.update(id,book);
-        model.addAttribute("book", bookServiceImp.getAll());
+        bookServiceImpl.update(id,book);
+        model.addAttribute("book", bookServiceImpl.getAll());
         return "redirect:/api/book/list";
     }
 
     @GetMapping("/updateBookForm/{id}")
     public String newUpdateForm(@PathVariable("id") Long id, Model model) {
-        Book book = bookServiceImp.getById(id);
+        Book book = bookServiceImpl.getById(id);
         model.addAttribute("book",book);
         return "updateBook";
     }
 
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable(value = "id", required = true) Long id, Model model) {
-        model.addAttribute("author", bookServiceImp.getAll());
-        bookServiceImp.delete(id);
+        model.addAttribute("author", bookServiceImpl.getAll());
+        bookServiceImpl.delete(id);
         return "redirect:/api/book/list";
     }
 }

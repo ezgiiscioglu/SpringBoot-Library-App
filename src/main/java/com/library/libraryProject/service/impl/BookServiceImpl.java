@@ -1,4 +1,4 @@
-package com.library.libraryProject.service.imp;
+package com.library.libraryProject.service.impl;
 
 import com.library.libraryProject.model.Book;
 import com.library.libraryProject.repository.BookRepository;
@@ -6,14 +6,13 @@ import com.library.libraryProject.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BookServiceImp implements BookService {
+public class BookServiceImpl implements BookService {
     private final ModelMapper modelMapper;
     private final BookRepository bookRepository;
 

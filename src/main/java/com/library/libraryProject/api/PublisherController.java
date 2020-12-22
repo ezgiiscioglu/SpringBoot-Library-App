@@ -3,9 +3,8 @@ package com.library.libraryProject.api;
 import com.library.libraryProject.dto.PublisherDto;
 import com.library.libraryProject.model.Publisher;
 import com.library.libraryProject.service.PublisherService;
-import com.library.libraryProject.service.imp.PublisherServiceImp;
+import com.library.libraryProject.service.impl.PublisherServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ import java.util.List;
 @RequestMapping("/publisher")
 public class PublisherController {
 
-    private final PublisherServiceImp publisherServiceImp;
+    private final PublisherServiceImpl publisherServiceImpl;
     private final PublisherService publisherService;
 
     @GetMapping("/list")
@@ -29,7 +28,7 @@ public class PublisherController {
 
     @RequestMapping("/{id}")
     public String getById(@PathVariable("id") Long id, Model model) {
-        Publisher publisher = publisherServiceImp.getById(id);
+        Publisher publisher = publisherServiceImpl.getById(id);
 
         model.addAttribute("publisher", publisher);
         return "listPublisher";
@@ -41,14 +40,14 @@ public class PublisherController {
             publisher.setPublisher_id(id);
             return "updatePublisher";
         }
-        publisherServiceImp.update(id, publisher);
-        model.addAttribute("publisher", publisherServiceImp.getAll());
+        publisherServiceImpl.update(id, publisher);
+        model.addAttribute("publisher", publisherServiceImpl.getAll());
         return "redirect:/api/publisher/list";
     }
 
     @RequestMapping("/addPublisher")
     public String createPublisher(PublisherDto publisherDto, Model model) {
-        publisherServiceImp.save(publisherDto);
+        publisherServiceImpl.save(publisherDto);
         return "redirect:/api/publisher/list";
     }
 
@@ -59,14 +58,14 @@ public class PublisherController {
 
     @GetMapping("/updatePublisherForm/{id}")
     public String newUpdateForm(@PathVariable("id") Long id, Model model) {
-        Publisher publisher = publisherServiceImp.getById(id);
+        Publisher publisher = publisherServiceImpl.getById(id);
         model.addAttribute("publisher", publisher);
         return "updatePublisher";
     }
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable(value = "id", required = true) Long id,Model model){
-        model.addAttribute("publisher", publisherServiceImp.getAll());
-        publisherServiceImp.delete(id);
+        model.addAttribute("publisher", publisherServiceImpl.getAll());
+        publisherServiceImpl.delete(id);
         return "redirect:/api/publisher/list";
     }
 }

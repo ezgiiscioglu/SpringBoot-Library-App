@@ -1,4 +1,4 @@
-package com.library.libraryProject.service.imp;
+package com.library.libraryProject.service.impl;
 
 import com.library.libraryProject.dto.AuthorDto;
 import com.library.libraryProject.model.Author;
@@ -6,14 +6,13 @@ import com.library.libraryProject.repository.AuthorRepository;
 import com.library.libraryProject.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AuthorServiceImp implements AuthorService {
+public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
     private final ModelMapper modelMapper;
 

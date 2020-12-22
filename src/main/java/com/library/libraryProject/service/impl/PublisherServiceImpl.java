@@ -1,4 +1,4 @@
-package com.library.libraryProject.service.imp;
+package com.library.libraryProject.service.impl;
 
 import com.library.libraryProject.dto.PublisherDto;
 import com.library.libraryProject.model.Publisher;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PublisherServiceImp implements PublisherService {
+public class PublisherServiceImpl implements PublisherService {
     private final ModelMapper modelMapper;
     private final PublisherRepository publisherRepository;
 

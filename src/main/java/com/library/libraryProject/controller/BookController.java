@@ -25,13 +25,13 @@ public class BookController {
     public String getAll(Model model) {
         List<Book> books = bookService.getAll();
         model.addAttribute("books", books);
-        return "/api/book/listBook";
+        return "listBook";
     }
     @GetMapping("/{id}")
     public String getById(@PathVariable(value = "id", required = true) Long id, Model model) {
         Book book = bookServiceImpl.getById(id);
         model.addAttribute("book", book);
-        return "/api/book/listBook";
+        return "listBook";
     }
 
     @GetMapping("/addBookForm")

@@ -16,7 +16,7 @@ public class PublisherServiceImpl implements PublisherService {
     private final ModelMapper modelMapper;
     private final PublisherRepository publisherRepository;
 
-    public List<Publisher> getAll() {
+    public List<Publisher> getAllPublishers() {
         return publisherRepository.findAll();
     }
 

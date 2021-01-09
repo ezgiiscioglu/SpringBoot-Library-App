@@ -10,7 +10,7 @@
 <div th:insert="layout/header::header"></div>
 <div class="container">
     <h1 th:text="${add} ? 'Create a Book:' : 'Edit a Book:'" />
-    <a th:href="@{list}">Back to Book List</a>
+    <a th:href="@{/api/book/list}">Back to Book List</a>
     <form th:action="${add} ? @{/api/book/add-book} : @{/api/book/update-book/{id}(id=${book.book_id})}" th:object="${book}" method="POST">
         <div class="form-group">
             <label class="control-label col-sm-2" for="book_name">Book Name</label>

@@ -14,14 +14,12 @@
     </div>
     <table class="table table-striped">
         <tr>
-            <th>Author Id</th>
             <th>Author Name</th>
             <th>Description</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
         <tr th:each = "author : ${authors}">
-            <td th:text="${author.author_id}"></td>
             <td th:text="${author.author_name}"> </td>
             <td th:text="${author.description}"> </td>
             <td><a th:href="@{/api/author/updateAuthor/{id}(id=${author.author_id})}" class="btn btn-primary"></a></td>

@@ -1,48 +1,51 @@
-package com.library.libraryProject.api;
+package com.library.libraryProject.controller;
 
 import com.library.libraryProject.dto.AuthorDto;
 import com.library.libraryProject.model.Author;
 import com.library.libraryProject.service.impl.AuthorServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.library.libraryProject.util.ApiPaths;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/author")
+@RequiredArgsConstructor
+@Controller
+@RequestMapping(ApiPaths.AuthorCtrl.CTRL)
+
 public class AuthorController {
-    @Autowired
-    private AuthorServiceImpl authorServiceImpl;
+    private final AuthorServiceImpl authorServiceImpl;
 
     @GetMapping("/{id}")
     public String getById(@PathVariable(value = "id", required = true) Long id, Model model) {
         Author author= authorServiceImpl.getById(id);
         model.addAttribute("author", author);
-        return "listAuthor";
+        return "list-authors";
     }
 
     @GetMapping("/list")
     public String getAll(Model model)  {
-        List<Author> authors = authorServiceImpl.getAll();
+        List<Author> authors = authorServiceImpl.getAllAuthors();
         model.addAttribute("authors", authors);
-        return "listAuthor";
+        return "list-authors";
     }
 
     @GetMapping("/addAuthorForm")
     public String newCreateForm(AuthorDto authorDto) {
-        return "addAuthor";
+        return "add-author";
     }
 
     @PostMapping("/updateAuthor/{id}")
     public String updateAuthor(@PathVariable("id") Long id, Author author, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             author.setAuthor_id(id);
-            return "updateAuthor";
+            return "update-author";
         }
         authorServiceImpl.update(id,author);
-        model.addAttribute("author", authorServiceImpl.getAll());
+        model.addAttribute("author", authorServiceImpl.getAllAuthors());
         return "redirect:/api/author/list";
     }
 
@@ -56,12 +59,12 @@ public class AuthorController {
     public String newUpdateForm(@PathVariable("id") Long id, Model model) {
         Author author = authorServiceImpl.getById(id);
         model.addAttribute("author", author);
-        return "updateAuthor";
+        return "update-author";
     }
 
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable(value = "id", required = true) Long id, Model model) {
-        model.addAttribute("author", authorServiceImpl.getAll());
+        model.addAttribute("author", authorServiceImpl.getAllAuthors());
         authorServiceImpl.delete(id);
         return "redirect:/api/author/list";
     }

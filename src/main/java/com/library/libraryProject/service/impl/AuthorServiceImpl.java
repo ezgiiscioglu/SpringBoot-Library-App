@@ -16,7 +16,8 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
     private final ModelMapper modelMapper;
 
-    public List<Author> getAll() {
+    @Override
+    public List<Author> getAllAuthors() {
         return authorRepository.findAll();
     }
 

@@ -14,14 +14,12 @@
     </div>
     <table class="table table-striped">
         <tr>
-            <th>Publisher Id</th>
             <th>Publisher Name</th>
             <th>Description</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
         <tr th:each = "publisher : ${publishers}">
-            <td th:text="${publisher.publisher_id}"></td>
             <td th:text="${publisher.publisher_name}"> </td>
             <td th:text="${publisher.description}"> </td>
             <td><a th:href="@{/api/publisher/updatePublisher/{id}(id=${publisher.publisher_id})}" class="btn btn-primary"></a></td>

@@ -6,7 +6,7 @@ import com.library.libraryProject.model.Author;
 import java.util.List;
 
 public interface AuthorService {
-    List<Author> getAll();
+    List<Author> getAllAuthors();
     AuthorDto save(AuthorDto authorDto);
     Author update(Long id, Author author);
     Author getById(Long id);

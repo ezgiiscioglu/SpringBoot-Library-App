@@ -1,4 +1,4 @@
-package com.library.libraryProject.api;
+package com.library.libraryProject.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

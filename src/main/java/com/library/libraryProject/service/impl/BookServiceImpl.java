@@ -28,7 +28,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getById(Long id) throws ResourceNotFoundException {
-        //return bookRepository.findById(id).orElse(null);
         Book book = bookRepository.findById(id).orElse(null);
         if (book==null) {
             throw new ResourceNotFoundException("Cannot find book with id: " + id);
@@ -38,7 +37,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book save(Book book) throws BadResourceException, ResourceAlreadyExistsException {
-        //return bookRepository.save(book);
         if (!StringUtils.isEmpty(book.getBook_name())) {
             if (book.getBook_id() != null && existsById(book.getBook_id())) {
                 throw new ResourceAlreadyExistsException("Book with id: " + book.getBook_id() + " already exists");
@@ -46,7 +44,7 @@ public class BookServiceImpl implements BookService {
             return bookRepository.save(book);
         }
         else {
-            BadResourceException exc = new BadResourceException("Failed to save contact");
+            BadResourceException exc = new BadResourceException("Failed to save book");
             exc.addErrorMessage("Book is null or empty");
             throw exc;
         }
@@ -73,14 +71,12 @@ public class BookServiceImpl implements BookService {
     }
 */
     @Override
-    public Boolean delete(Long id) {
+    public void delete(Long id) {
         if (!existsById(id)) {
-            throw new ResourceNotFoundException("Cannot find contact with id: " + id);
+            throw new ResourceNotFoundException("Cannot find book with id: " + id);
         }
         else {
             bookRepository.deleteById(id);
-            return null;
         }
     }
-
 }

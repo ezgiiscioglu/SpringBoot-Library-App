@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <div th:replace="layout/header"></div>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+<div class="container">
+    <br/>
+    <div class="card">
+        <div class="card-header">Book Detail</div>
+        <div class="col-md-12">
+            <div th:if="${book}">
+                <table class="table table-responsive-md">
+                    <tr>
+                        <th>Book Name :</th>
+                        <td th:text="${book.book_name}"></td>
+                    </tr>
+                    <tr>
+                        <th>Book Sub Name :</th>
+                        <td th:text="${book.book_sub_name}"></td>
+                    </tr>
+                    <tr>
+                        <th>Book Serial Name :</th>
+                        <td th:text="${book.book_serial_name}"></td>
+                    </tr>
+                    <tr>
+                        <th>ISBN :</th>
+                        <td th:text="${book.isbn}"></td>
+                    </tr>s
+                    <tr>
+                        <th>Description :</th>
+                        <td th:text="${book.description}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="card-body">
+            <a th:href="@{/api/book/update-book/{id}(id=${book.book_id})}">
+                <button type="button" class="btn btn-outline-secondary">Edit</button>
+            </a>
+            <a th:href="@{/api/book/delete/{id}(id=${book.book_id})}">
+                <button type="button" class="btn btn-outline-secondary">Delete</button>
+            </a>
+        </div>
+    </div>
+    <a th:href="@{/api/book/list}">Back to Book List</a>
+</div>
+</body>
+</html>

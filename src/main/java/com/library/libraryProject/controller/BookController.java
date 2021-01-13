@@ -1,9 +1,7 @@
 package com.library.libraryProject.controller;
 
 import com.library.libraryProject.model.Book;
-import com.library.libraryProject.service.impl.AuthorServiceImpl;
 import com.library.libraryProject.service.impl.BookServiceImpl;
-import com.library.libraryProject.service.impl.PublisherServiceImpl;
 import com.library.libraryProject.util.ApiPaths;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +27,15 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public String getById(@PathVariable(value = "id", required = true) Long id, Model model) {
-        Book book = bookServiceImpl.getById(id);
-        log.info(String.valueOf(book.getBook_id()));
+    public String getById(@PathVariable(value = "id") Long id, Model model) {
+        Book book = null;
+        try {
+            book = bookServiceImpl.getById(id);
+        } catch (ResourceNotFoundException ex) {
+            model.addAttribute("errorMessage", "Contact not found");
+        }
         model.addAttribute("book", book);
-        return "list-books";
+        return "book";
     }
 
     @GetMapping("/add-book")
@@ -64,7 +66,7 @@ public class BookController {
         try {
             book = bookServiceImpl.getById(id);
         } catch (ResourceNotFoundException ex) {
-            model.addAttribute("errorMessage", "Contact not found");
+            model.addAttribute("errorMessage", "Book not found");
         }
         model.addAttribute("add", false);
         model.addAttribute("book", book);
@@ -85,16 +87,17 @@ public class BookController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id, Model model) {
         try{
+            model.addAttribute("book", bookServiceImpl.getAllBooks());
             bookServiceImpl.delete(id);
             return "redirect:/api/book/list";
         } catch (ResourceNotFoundException ex) {
             String errorMessage = ex.getMessage();
             log.error(errorMessage);
             model.addAttribute("errorMessage", errorMessage);
-            return "redirect:/api/book/list";
+            return "list-books";
         }
     }
 }

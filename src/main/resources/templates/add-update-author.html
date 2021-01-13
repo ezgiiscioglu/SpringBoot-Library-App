@@ -1,30 +1,38 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Book</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Add Author</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div th:insert="layout/header::header"></div>
 <div class="container">
-    <h1>Add author</h1>
-    <form th:object="${authorDto}" th:action="@{addAuthor}" action="#" method="post" class="form-horizontal">
+    <br/>
+    <div class="card">
+        <div class="card-header" th:text="${add} ? 'Create an Author' : 'Edit Author'"/>
+        <div class="card-body">
+            <div class="col-md-12">
+                <form th:action="${add} ? @{/api/author/add-author} : @{/api/author/update-author/{id}(id=${author.author_id})}"
+                      th:object="${author}" method="POST">
         <div class="form-group">
             <label class="control-label col-sm-2" for="author_name">Author Name</label>
             <div class="col-sm-10"><input type="text" id="author_name" th:field="*{author_name}" /></div>
-            <span th:if="${#fields.hasErrors('author_name')}" th:errors="*{author_name}"></span>
         </div>
-
         <div class="form-group">
             <label class="control-label col-sm-2" for="description">Description</label>
             <div class="col-sm-10"><input type="text" id="description" th:field="*{description}" /></div>
-            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
         </div>
 
-        <input type="submit" value="Save" class="btn btn-info"></input>
-    </form>
+                    <input type="submit" th:value="${add} ? 'Create' : 'Update'"
+                           class="btn btn-outline-secondary"></input>
+                </form>
+            </div>
+        </div>
+        <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error"/>
+    </div>
+    <a th:href="@{/api/author/list}">Back to Author List</a>
 </div>
 </body>
 </html>

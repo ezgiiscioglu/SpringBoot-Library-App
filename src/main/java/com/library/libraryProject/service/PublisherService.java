@@ -1,6 +1,8 @@
 package com.library.libraryProject.service;
 
 import com.library.libraryProject.dto.PublisherDto;
+import com.library.libraryProject.exception.BadResourceException;
+import com.library.libraryProject.exception.ResourceAlreadyExistsException;
 import com.library.libraryProject.model.Publisher;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,6 @@ public interface PublisherService {
     List<Publisher> getAllPublishers();
     Publisher getById(Long id);
     Publisher update(Long id, Publisher publisher);
-    PublisherDto save(PublisherDto publisherDto);
-    Boolean delete(Long id);
+    Publisher save(Publisher publisher) throws BadResourceException, ResourceAlreadyExistsException;
+    void delete(Long id);
 }

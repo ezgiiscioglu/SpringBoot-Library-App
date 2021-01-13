@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <div th:replace="layout/header"></div>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+<div class="container">
+    <br/>
+    <div class="card">
+        <div class="card-header">Publisher Detail</div>
+        <div class="col-md-12">
+            <div th:if="${publisher}">
+                <table class="table table-responsive-md">
+                    <tr>
+                        <th>Publisher Name :</th>
+                        <td th:text="${publisher.publisher_name}"></td>
+                    </tr>
+                    <tr>
+                        <th>Publisher Description :</th>
+                        <td th:text="${publisher.description}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="card-body">
+            <a th:href="@{/api/publisher/update-publisher/{id}(id=${publisher.publisher_id})}">
+                <button type="button" class="btn btn-outline-secondary">Edit</button>
+            </a>
+            <a th:href="@{/api/publisher/delete/{id}(id=${publisher.publisher_id})}">
+                <button type="button" class="btn btn-outline-secondary">Delete</button>
+            </a>
+        </div>
+    </div>
+    <a th:href="@{/api/publisher/list}">Back to Publisher List</a>
+</div>
+</body>
+</html>

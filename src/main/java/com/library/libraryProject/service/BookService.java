@@ -11,6 +11,6 @@ public interface BookService {
     Book getById(Long id);
     Book save(Book book) throws BadResourceException, ResourceAlreadyExistsException;
     Book update(Long id, Book book);
-    Boolean delete(Long id);
+    void delete(Long id);
     // List<Book> searchBooks(String book);
 }

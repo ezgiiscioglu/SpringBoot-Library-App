@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <div th:replace="layout/header"></div>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+<div class="container">
+    <br/>
+    <div class="card">
+        <div class="card-header">Author Detail</div>
+        <div class="col-md-12">
+            <div th:if="${author}">
+                <table class="table table-responsive-md">
+                    <tr>
+                        <th>Author Name :</th>
+                        <td th:text="${author.author_name}"></td>
+                    </tr>
+                    <tr>
+                        <th>Author Description :</th>
+                        <td th:text="${author.description}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="card-body">
+            <a th:href="@{/api/author/update-author/{id}(id=${author.author_id})}">
+                <button type="button" class="btn btn-outline-secondary">Edit</button>
+            </a>
+            <a th:href="@{/api/author/delete/{id}(id=${author.author_id})}">
+                <button type="button" class="btn btn-outline-secondary">Delete</button>
+            </a>
+        </div>
+    </div>
+    <a th:href="@{/api/book/list}">Back to Author List</a>
+</div>
+</body>
+</html>

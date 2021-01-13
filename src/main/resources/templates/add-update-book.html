@@ -2,44 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Book</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div th:insert="layout/header::header"></div>
 <div class="container">
-    <h1 th:text="${add} ? 'Create a Book:' : 'Edit a Book:'" />
+    <br/>
+    <div class="card">
+        <div class="card-header" th:text="${add} ? 'Create a Book' : 'Edit Book'"/>
+        <div class="card-body">
+            <div class="col-md-12">
+                <form th:action="${add} ? @{/api/book/add-book} : @{/api/book/update-book/{id}(id=${book.book_id})}"
+                      th:object="${book}" method="POST">
+                    <div class="form-group">
+                        <label class="control-label col-sm-10" for="book_name">Book Name</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="book_name"
+                                                      th:field="*{book_name}"/></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-10" for="book_sub_name">Book Sub Name</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="book_sub_name"
+                                                      th:field="*{book_sub_name}"/></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-10" for="book_serial_name">Book Serial Name</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="book_serial_name"
+                                                      th:field="*{book_serial_name}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-10" for="isbn">ISBN</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="isbn" th:field="*{isbn}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-10" for="description">Description</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="description"
+                                                      th:field="*{description}"/></div>
+                    </div>
+                    <input type="submit" th:value="${add} ? 'Create' : 'Update'"
+                           class="btn btn-outline-secondary"></input>
+                </form>
+            </div>
+        </div>
+        <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error"/>
+    </div>
     <a th:href="@{/api/book/list}">Back to Book List</a>
-    <form th:action="${add} ? @{/api/book/add-book} : @{/api/book/update-book/{id}(id=${book.book_id})}" th:object="${book}" method="POST">
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="book_name">Book Name</label>
-            <div class="col-sm-10"><input type="text" id="book_name" th:field="*{book_name}" /></div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="book_sub_name">Book Sub Name</label>
-            <div class="col-sm-10"><input type="text" id="book_sub_name" th:field="*{book_sub_name}" /></div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="book_serial_name">Book Serial Name</label>
-            <div class="col-sm-10"><input type="text" id="book_serial_name" th:field="*{book_serial_name}" /></div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="isbn">ISBN</label>
-            <div class="col-sm-10"><input type="text" id="isbn"th:field="*{isbn}" /></div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="description">Description</label>
-            <div class="col-sm-10"><input type="text" id="description" th:field="*{description}" /></div>
-        </div>
-
-        <input type="submit" th:value="${add} ? 'Create' : 'Update'" class="btn btn-info"></input>
-    </form>
-    <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
 </div>
 </body>
 </html>

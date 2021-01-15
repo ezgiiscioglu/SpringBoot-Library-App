@@ -7,7 +7,6 @@ import com.library.libraryProject.repository.AuthorRepository;
 import com.library.libraryProject.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
-    private final ModelMapper modelMapper;
 
     private boolean existsById(Long id) {
         return authorRepository.existsById(id);

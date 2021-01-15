@@ -1,10 +1,8 @@
 package com.library.libraryProject.service;
 
-import com.library.libraryProject.dto.PublisherDto;
 import com.library.libraryProject.exception.BadResourceException;
 import com.library.libraryProject.exception.ResourceAlreadyExistsException;
 import com.library.libraryProject.model.Publisher;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

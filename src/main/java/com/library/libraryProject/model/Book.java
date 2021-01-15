@@ -20,18 +20,21 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long book_id;
 
+    @NotNull
     @Column(length = 100)
     private String book_name;
 
     @Column(length = 100)
     private String book_sub_name;
 
+    @NotNull
     @Column(length = 100)
     private String book_serial_name;
 
     @Column(unique = true)
     private String isbn;
 
+    @NotNull
     @Column( length = 1000)
     private String description;
 

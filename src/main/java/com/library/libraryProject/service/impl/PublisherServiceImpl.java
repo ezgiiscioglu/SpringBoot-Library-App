@@ -7,7 +7,6 @@ import com.library.libraryProject.repository.PublisherRepository;
 import com.library.libraryProject.service.PublisherService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class PublisherServiceImpl implements PublisherService {
-    private final ModelMapper modelMapper;
     private final PublisherRepository publisherRepository;
 
     private boolean existsById(Long id) {

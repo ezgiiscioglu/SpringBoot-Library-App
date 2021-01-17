@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -26,12 +27,15 @@ public class Publisher {
     @Column(length = 1000)
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "book_id")
-    private Book book;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "publisher")
+    private List<Book> books;
 
     public Publisher(String publisher_name, String description) {
         this.publisher_name = publisher_name;
         this.description = description;
+    }
+
+    public void addBook(Book book) {
+        this.books.add(book);
     }
 }

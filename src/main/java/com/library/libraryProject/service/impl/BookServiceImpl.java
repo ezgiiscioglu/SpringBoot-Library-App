@@ -42,7 +42,7 @@ public class BookServiceImpl implements BookService {
                 throw new ResourceAlreadyExistsException("Book with id: " + book.getBook_id() + " already exists");
             }
             return bookRepository.save(book);
-        }
+       }
         else {
             BadResourceException exc = new BadResourceException("Failed to save book");
             exc.addErrorMessage("Book is null or empty");
